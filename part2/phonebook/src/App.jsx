@@ -44,6 +44,32 @@ const App = () => {
     }
   }
 
+  const handleFilter = (event) => {
+    let value = event.target.value
+    let tempFiltered = persons.filter(person => person.name.toLowerCase().startsWith(value.toLowerCase()))
+    setFilteredPersons(tempFiltered)
+    setFilter(value);
+  }
+
+  const addPerson = (event) => {
+    event.preventDefault()
+    let filteredArray = persons.some(person => person.name === newName)
+    if(filteredArray) {
+      alert(`${newName} is already added to phonebook`)
+    }else{
+      let person = {
+        id: persons.length + 1,
+        name: newName,
+        number: newPhoneNumber
+      }
+      setPersons(persons.concat(person))
+      setNewName('')
+    }
+  }
+
+
+
+
   return (
     <div>
       <h2>Phonebook</h2>
